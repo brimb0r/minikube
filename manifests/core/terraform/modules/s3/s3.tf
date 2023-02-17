@@ -1,9 +1,9 @@
 resource "aws_s3_bucket" "primary_app_file_storage" {
-  bucket = "${var.environment}-${var.aws_region}-aocsol-app"
+  bucket = "${var.environment}-${var.aws_region}-app"
   acl    = "private"
 
   tags = {
-    Name        = "${var.environment}-${var.aws_region}-aocsol-app"
+    Name        = "${var.environment}-${var.aws_region}-app"
     Environment = var.environment
   }
 
@@ -38,15 +38,15 @@ resource "aws_s3_bucket_policy" "primary_app_file_storage_bucket_policy" {
          "s3:GetObject",
          "s3:PutObject"
        ],
-       "Resource": "arn:aws:s3:::${var.environment}-${var.aws_region}-aocsol-app/*"
+       "Resource": "arn:aws:s3:::${var.environment}-${var.aws_region}-app/*"
     },
     {
       "Effect": "Deny",
       "Principal": "*",
       "Action": "*",
       "Resource": [
-        "arn:aws:s3:::${var.environment}-${var.aws_region}-aocsol-app",
-        "arn:aws:s3:::${var.environment}-${var.aws_region}-aocsol-app/*"
+        "arn:aws:s3:::${var.environment}-${var.aws_region}-app",
+        "arn:aws:s3:::${var.environment}-${var.aws_region}-app/*"
       ],
       "Condition": {
         "Bool": {
