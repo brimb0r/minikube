@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: hello-world
+  namespace: argocd
+spec:
+  destination:
+    name: ''
+    namespace: default
+    server: 'https://kubernetes.default.svc'
+  source:
+    path: manifests/hello-world
+    repoURL: 'https://github.com/craigg-wex/ps-wex-k8s.git'
+    targetRevision: HEAD
+    helm:
+      valueFiles:
+        - values.yaml
+      parameters:
+        - name: service.externalPort
+          value: '8081'
+        - name: service.internalPort
+          value: '8081'
+  project: default
+  syncPolicy: {}
